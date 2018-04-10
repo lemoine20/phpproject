@@ -1,8 +1,8 @@
 <?php
 require_once("../html/header.html");
-echo "<buttton><a href='ajout_data.php'>ajout bdd</a></button><br>";
-
 require_once("../php/database.php");
+
+echo "<buttton><a href='ajout_data.php'>ajout bdd</a></button><br>";
 
 try{
   $dbCnx = new PDO($mysqlDsn,$myUserDb,$myPwdDb);
@@ -14,25 +14,27 @@ try{
 $sth = $dbCnx->prepare("SELECT * FROM parametre");
 $sth->execute();
 $parametre = $sth->fetchAll(PDO::FETCH_CLASS,'Parametre');
-print_r($parametre);
+
 
 ?>
-<table border="1">
-
-  <tr>
-    <td>ID</td>
-    <td> Date </td>
-    <td> Corde</td>
-    <td> Libelle</td>
-    <td>  Tmax %</td>
-    <td>Libelle</td>
-  </tr>
+<br>
+<table class="table">
+    <thead>
+      <tr>
+        <td scope="col">ID</td>
+        <td scope="col"> Date </td>
+        <td scope="col"> Corde</td>
+        <td scope="col"> Libelle</td>
+        <td scope="col">  Tmax %</td>
+      </tr>
+    </thead>
+    <tbody>
   <?php
   foreach ($parametre as $parametres) {
     echo "<tr><td> ".$parametres->getId() ."</td><td> ". $parametres->getDate_ajout()."</td><td> ".$parametres->getCorde()."</td><td> ".$parametres->Getlibelle()."</td><td> ".$parametres->getTmax_p()."</td></tr>";
   }
   ?>
-
+  </tbody>
 </table>
 
 <?php

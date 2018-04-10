@@ -3,8 +3,14 @@
 
 
     require_once("../php/database.php");
+    try{
+        $dbCnx = new PDO($mysqlDsn,$myUserDb,$myPwdDb);
+    }catch(PDOException $e){
+        echo "Connexion échouée : ".$e->getMessage();
+        exit;
+    }
 ?>
-<form action="index.php" method="post">
+<form method="post">
     Date : <input type="date" name="date1"/> <!-- possible ajout auto. Avoir-->
     <br>
     Corde : <input type="number" min="0" name="corde"/> en mm.
@@ -20,55 +26,58 @@
     <input type="submit" name="submit"><br>
 
     <?php
+
         $length = 78;
-        // $token = bin2hex(random_bytes($length));
-        // $token = random(20);
-        // echo $token."<br>test<br>";
         // vérifiez que les données sont présentes
         $_POST["corde"]."<br>"; //corde
-        // echo filter_has_var(INPUT_POST, 'corde') ? 'Yes' : 'No';
+        //echo filter_has_var(INPUT_POST, 'corde') ? 'Yes' : 'No';
 
         $_POST["date1"]."<br>"; //date
-        // echo filter_has_var(INPUT_POST, 'date1') ? 'Yes' : 'No';
+        //echo filter_has_var(INPUT_POST, 'date1') ? 'Yes' : 'No';
 
         $_POST["nb_point"]."<br>"; //nb_point
-        // echo filter_has_var(INPUT_POST, 'nb_point') ? 'Yes' : 'No';
+        //echo filter_has_var(INPUT_POST, 'nb_point') ? 'Yes' : 'No';
 
         $_POST["libelle"]."<br>"; //libelle
-        // echo filter_has_var(INPUT_POST, 'libelle') ? 'Yes' : 'No';
+        //echo filter_has_var(INPUT_POST, 'libelle') ? 'Yes' : 'No';
 
         $_POST["tmax_p"]."<br>";
-        // echo filter_has_var(INPUT_POST, 'tmax_p') ? 'Yes' : 'No';
+        //echo filter_has_var(INPUT_POST, 'tmax_p') ? 'Yes' : 'No';
 
         $_POST["fmax_p"]."<br>";
-        // echo filter_has_var(INPUT_POST, 'fmax_p') ? 'Yes' : 'No';
+        //echo filter_has_var(INPUT_POST, 'fmax_p') ? 'Yes' : 'No';
 
         $corde = $_POST["corde"];
-        echo addslashes($corde)."<br>";
+        echo addslashes("corde : ".$corde)."<br>";
 
         $date1 = $_POST["date1"];
-
-        echo addslashes($date1)."<br>";
+        echo addslashes("date : ".$date1)."<br>";
 
         $nb_point = $_POST["nb_point"];
-        echo addslashes($nb_point)."<br>";
+        echo addslashes("NB_POINT :".$nb_point)."<br>";
 
         $libelle = $_POST["libelle"];
-        echo addslashes($libelle)."<br>";
+        echo addslashes("Libelle : ".$libelle)."<br>";
 
         $tmax_p = $_POST["tmax_p"];
-        echo addslashes($tmax_p)."<br>";
+        echo addslashes("Tmax_p : ".$tmax_p)."<br>";
 
         $fmax_p = $_POST["fmax_p"];
-        echo addslashes($fmax_p)."<br>";
+        echo addslashes("fmax_p : ".$fmax_p)."<br>";
+
+        $tmax_mm =($tmax_p/100)*$corde;
+        $fmax_mm =($fmax_p/100)*$corde;
 
 
-        if (isset($corde)&&isset($date1)&&isset($nb_point)&&isset($libelle)&&isset($tmax_p)&&isset($fmax_p)){
-            $testons=$dbCnx->prepare("INSERT INTO parametre(corde, tmax_p,fmax_p) VALUES($corde,, $tmax_p, $fmax_p)");
-            $testons->execute();
-        }else{
-            echo "aucun insertion";
+        //
+        $sth = $dbCnx->prepare("INSERT INTO parametre (date_ajout,corde,tmax_p,tmax_mm,fmax_p,fmax_mm,nb_point,libelle) VALUES ('$date1',$corde,$tmax_p,$tmax_mm,$fmax_p,$fmax_mm,$nb_point,'$libelle')");
+        try {
+            $sth->execute();
+            echo "ok";
+        } catch (Exception $e) {
+            echo $e;
         }
+        $parametre = $sth->fetchAll(PDO::FETCH_CLASS,'Parametre');
     ?>
 </form>
 
