@@ -11,8 +11,8 @@ try{
 }
 
 // appel des bibliothèque de jpgraph
-require_once ('../jpgraph/jpgraph.php');
-require_once ('../jpgraph/jpgraph_line.php');
+require_once ('../jpgraph-4.2.0/src/jpgraph.php');
+require_once ('../jpgraph-4.2.0/src/jpgraph_line.php');
 
 
 //Valeur dans le graphe
