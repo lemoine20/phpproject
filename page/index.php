@@ -31,7 +31,7 @@ $parametre = $sth->fetchAll(PDO::FETCH_CLASS,'Parametre');
     <tbody>
   <?php
   foreach ($parametre as $parametres) {
-    echo "<tr><td> ".$parametres->getId() ."</td><td> ". $parametres->getDate_ajout()."</td><td> ".$parametres->getCorde()."</td><td> ".$parametres->Getlibelle()."</td><td> ".$parametres->getTmax_p()."</td></tr>";
+    echo "<tr><th scope='row'> ".$parametres->getId() ."</th><td> ". $parametres->getDate_ajout()."</td><td> ".$parametres->getCorde()."</td><td> ".$parametres->Getlibelle()."</td><td> ".$parametres->getTmax_p()."</td></tr>";
   }
   ?>
   </tbody>

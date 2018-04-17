@@ -10,21 +10,25 @@
         exit;
     }
 ?>
-<form method="post">
-    Date : <input type="date" name="date1"/> <!-- possible ajout auto. Avoir-->
-    <br>
-    Corde : <input type="number" min="0" name="corde"/> en mm.
-    <br>
-    Nombre de points : <input type="number" min="0" name="nb_point"/>
-    <br>
-    libelle : <input type="text" name="libelle"/>
-    <br>
-    Tmax : <input type="number" max="100" min ="0" name="tmax_p"/>%
-    <br>
-    Fmax : <input type="number" max="100" min ="0" name="fmax_p"/>%
-    <br>
-    <input type="submit" name="submit"><br>
 
+<buttton><a href='index.php'>Page Principale</a></button><br>
+<form  method="post">
+    <div class="form-group">
+        Date : <input type="date" class="form-control" name="date1"/> <!-- possible ajout auto. Avoir-->
+        <br>
+        Corde : <input type="number" class="form-control" min="0" name="corde"/> en mm.
+        <br>
+        Nombre de points : <input type="number" class="form-control" min="0" name="nb_point"/>
+        <br>
+        libelle : <input type="text" class="form-control" name="libelle"/>
+        <br>
+        Tmax (%) : <input type="number" class="form-control" max="100" min ="0" name="tmax_p"/>
+        <br>
+        Fmax (%) : <input type="number" class="form-control" max="100" min ="0" name="fmax_p"/>
+        <br>
+        <br>
+        <input type="submit" name="submit" class="btn btn-primary"><br>
+    </div>
     <?php
 
         $length = 78;
