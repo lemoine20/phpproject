@@ -66,6 +66,10 @@ class Parametre{
   {
     return $this->fic_csv;
   }
+  public function getNb_point()
+  {
+    return $this->nb_point;
+  }
 }
 
 
