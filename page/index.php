@@ -2,7 +2,7 @@
 require_once("../html/header.html");
 require_once("../php/database.php");
 
-echo "<buttton><a href='ajout_data.php'>ajout bdd</a></button><br>";
+echo "<button class='btn btn-success'><a href='ajout_data.php'>ajout bdd</a></button><br>";
 
 try{
   $dbCnx = new PDO($mysqlDsn,$myUserDb,$myPwdDb);
@@ -13,7 +13,7 @@ try{
 
 $sth = $dbCnx->prepare("SELECT * FROM parametre");
 $sth->execute();
-$parametre = $sth->fetchAll(PDO::FETCH_CLASS,'Parametre');
+$parametres = $sth->fetchAll(PDO::FETCH_CLASS,'Parametre');
 
 
 ?>
@@ -22,16 +22,29 @@ $parametre = $sth->fetchAll(PDO::FETCH_CLASS,'Parametre');
     <thead>
       <tr>
         <td scope="col">ID</td>
-        <td scope="col"> Date </td>
-        <td scope="col"> Corde</td>
-        <td scope="col"> Libelle</td>
-        <td scope="col">  Tmax %</td>
+        <td scope="col">Date </td>
+        <td scope="col">Corde</td>
+        <td scope="col">Nombre de points</td>
+        <td scope="col">Libelle</td>
+        <td scope="col">Tmax %</td>
+        <td scope="col">Fmax %</td>
+        <td scope="col">Voir Graphique</td>
       </tr>
     </thead>
     <tbody>
   <?php
-  foreach ($parametre as $parametres) {
-    echo "<tr><th scope='row'> ".$parametres->getId() ."</th><td> ". $parametres->getDate_ajout()."</td><td> ".$parametres->getCorde()."</td><td> ".$parametres->Getlibelle()."</td><td> ".$parametres->getTmax_p()."</td></tr>";
+  foreach ($parametres as $parametre) {
+  echo "<tr><th scope='row'> ".$parametre->getId() ."</th>";
+  echo "<td> ". $parametre->getDate_ajout()."</td>";
+  echo "<td> ".$parametre->getCorde()."</td>";
+  echo "<td> ".$parametre->getNb_point()."</td>";
+  echo "<td> ".$parametre->Getlibelle()."</td>";
+  echo "<td> ".$parametre->getTmax_p()."</td>";
+  echo "<td> ".$parametre->getFmax_p()."</td>";
+  echo "<td><form action='graph.php' method='post'>
+  <input type='text' value='".$parametre->getId()."' hidden>
+  <input type='submit' name='Graphique' value='Voir Graphique' class='btn btn-primary'></form></td>";
+  echo "</tr>";
   }
   ?>
   </tbody>

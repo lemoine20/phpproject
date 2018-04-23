@@ -1,7 +1,4 @@
-
-
 <?php
-
 $mysqlServerIp = 'localhost';
 $mysqlServerPort = "3306";
 $mysqlDbName = "projetphp";
@@ -9,11 +6,7 @@ $mysqlDbCharset = "UTF8";
 $mysqlDsn = "mysql:host=".$mysqlServerIp.";port=".$mysqlServerPort.";dbname=".$mysqlDbName.";charset=".$mysqlDbCharset.";";
 $myUserDb = 'projetphp' ;
 $myPwdDb = 'phpprojet' ;
-
-
-
 class Parametre{
-
   private $id;
   private $libelle;
   private $date_ajout;
@@ -25,7 +18,6 @@ class Parametre{
   private $corde;
   private $fic_img;
   private $fic_csv;
-
   public function getLibelle()
   {
     return $this->libelle;
@@ -66,12 +58,12 @@ class Parametre{
   {
     return $this->fic_csv;
   }
+  public function getNb_point()
+  {
+    return $this->nb_point;
+  }
 }
-
-
 class Cambrure{
-
-
   private $id;
   private $x;
   private $y;
@@ -82,8 +74,6 @@ class Cambrure{
   private $igx;
   private $id_parametre;
   private $libelle;
-
-
   public function getId()
   {
     return $this->id;
