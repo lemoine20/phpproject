@@ -81,7 +81,7 @@
         } catch (Exception $e) {
             echo $e;
         }
-        $parametre = $sth->fetchAll(PDO::FETCH_CLASS,'Parametre');
+        $parametres = $sth->fetchAll(PDO::FETCH_CLASS,'Parametre');
     ?>
 </form>
 
