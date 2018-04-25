@@ -44,9 +44,11 @@ $parametres = $sth->fetchAll(PDO::FETCH_CLASS,'Parametre');
   echo "<td> ".$parametre->getFmax_p()."</td>";
   echo "<td><form action='graph.php' method='post'>
   <input type='text' value='".$parametre->getId()."' hidden>
-  <input type='submit' name='Graphique' value='Voir Graphique' class='btn btn-primary'></form></td>";
-  echo "<td> <input type='submit' name='Suppression' value='delete' onclick=\"alert('hello world');\" class='btn btn-primary'>  </td>";
-  echo "</tr>";
+  <input type='submit' name='Graphique' value='Voir Graphique' class='btn btn-primary'></form></td>";?>
+
+  <td> <input type='submit' name='Suppression' value='delete' onclick="popup()" class='btn btn-primary'>  </td>
+  </tr>
+  <?php
   }
   ?>
   </tbody>
