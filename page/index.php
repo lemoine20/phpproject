@@ -29,6 +29,7 @@ $parametres = $sth->fetchAll(PDO::FETCH_CLASS,'Parametre');
         <td scope="col">Tmax %</td>
         <td scope="col">Fmax %</td>
         <td scope="col">Voir Graphique</td>
+        <td scope="col">Suppression</td>
       </tr>
     </thead>
     <tbody>
@@ -44,6 +45,7 @@ $parametres = $sth->fetchAll(PDO::FETCH_CLASS,'Parametre');
   echo "<td><form action='graph.php' method='post'>
   <input type='text' value='".$parametre->getId()."' hidden>
   <input type='submit' name='Graphique' value='Voir Graphique' class='btn btn-primary'></form></td>";
+  echo "<td> <input type='submit' name='Suppression' value='delete' onclick=\"alert('hello world');\" class='btn btn-primary'>  </td>";
   echo "</tr>";
   }
   ?>
