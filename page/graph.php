@@ -30,7 +30,7 @@ for ($i=0; $i < $parametre->getNb_point(); $i++) {
   $Sixgi = $Dsi * $Xgi;
   $sommedSiXgi = $sommedSiXgi + $Sixgi;
   $sth = $dbCnx->prepare("INSERT INTO Cambrure (x,t,f,yintra,yextra,igx,id_parametre)
-                          VALUES ('$Xpos,$epaisseur,$Cambrure,$Xintrados,$Xextrados,$Xgi,$parametre->getId()");
+                          VALUES ('$Xpos,$epaisseur,$Cambrure,$Xintrados,$Xextrados,$Xgi,$parametre->getId)'");
   try {
       $sth->execute();
       echo "ok";

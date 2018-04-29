@@ -33,23 +33,7 @@
 
         $length = 78;
         // vérifiez que les données sont présentes
-        $_POST["corde"]."<br>"; //corde
-        //echo filter_has_var(INPUT_POST, 'corde') ? 'Yes' : 'No';
 
-        $_POST["date1"]."<br>"; //date
-        //echo filter_has_var(INPUT_POST, 'date1') ? 'Yes' : 'No';
-
-        $_POST["nb_point"]."<br>"; //nb_point
-        //echo filter_has_var(INPUT_POST, 'nb_point') ? 'Yes' : 'No';
-
-        $_POST["libelle"]."<br>"; //libelle
-        //echo filter_has_var(INPUT_POST, 'libelle') ? 'Yes' : 'No';
-
-        $_POST["tmax_p"]."<br>";
-        //echo filter_has_var(INPUT_POST, 'tmax_p') ? 'Yes' : 'No';
-
-        $_POST["fmax_p"]."<br>";
-        //echo filter_has_var(INPUT_POST, 'fmax_p') ? 'Yes' : 'No';
 
         $corde = $_POST["corde"];
         echo addslashes("corde : ".$corde)."<br>";
