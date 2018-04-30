@@ -9,16 +9,16 @@
 
 CREATE TABLE parametre(
         id         int (11) Auto_increment  NOT NULL ,
-        date_ajout Date ,
+        date_ajout Varchar (25) ,
         corde      Int ,
         tmax_p     Float ,
         tmax_mm    Int ,
         fmax_p     Float ,
         fmax_mm    Int ,
         nb_point   Int ,
-        fic_img    Char (25) ,
-        fic_csv    Char (25) ,
-        libelle    Char (25) ,
+        fic_img    Varchar (25) ,
+        fic_csv    Varchar (25) ,
+        libelle    Varchar (25) ,
         PRIMARY KEY (id )
 )ENGINE=InnoDB;
 

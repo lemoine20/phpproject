@@ -15,10 +15,10 @@
 <form  method="post" action="index.php">
     <div class="form-group">
         <?php
-        $id_recover = intval($_POST['id_recover3']);
-        $sth = $dbCnx->prepare("SELECT * FROM parametre WHERE id='".$id_recover."'");
-        $sth->execute();
-        $parametre = $sth->fetchAll(PDO::FETCH_CLASS,'Parametre');
+            $id_recover = intval($_POST['id_recover3']);
+            $sth = $dbCnx->prepare("SELECT * FROM parametre WHERE id='".$id_recover."'");
+            $sth->execute();
+            $parametre = $sth->fetchAll(PDO::FETCH_CLASS,'Parametre');
 
         ?>
         <table class="table">
@@ -34,14 +34,14 @@
         </thead>
         <tbody>
         <?php
-        echo "<tr><th scope='row'> ".$id_recover."</th>";
-        //echo "<td> ". $parametre[0]->getDate_ajout()."</td>";
-        echo "<td> ".$parametre[0]->getCorde()."</td>";
-        echo "<td> ".$parametre[0]->getNb_point()."</td>";
-        echo "<td> ".$parametre[0]->Getlibelle()."</td>";
-        echo "<td> ".$parametre[0]->getTmax_p()."</td>";
-        echo "<td> ".$parametre[0]->getFmax_p()."</td>";
-        echo "</tbody></table>";
+            echo "<tr><th scope='row'> ".$id_recover."</th>";
+            //echo "<td> ". $parametre[0]->getDate_ajout()."</td>";
+            echo "<td> ".$parametre[0]->getCorde()."</td>";
+            echo "<td> ".$parametre[0]->getNb_point()."</td>";
+            echo "<td> ".$parametre[0]->Getlibelle()."</td>";
+            echo "<td> ".$parametre[0]->getTmax_p()."</td>";
+            echo "<td> ".$parametre[0]->getFmax_p()."</td>";
+            echo "</tbody></table>";
         ?>
 
         Corde (en mm) : <input type="number" class="form-control" min="0" name="corde" value=""/>
@@ -79,7 +79,7 @@
 
 
         //
-        $sth = $dbCnx->prepare("UPDATE parametre SET `corde`=[".$corde."],`tmax_p` = [".$tmax_p."],`tmax_mm`=[".$tmax_mm."],`fmax_p`=[".$fmax_p."],`fmax_mm`=[".$fmax_mm."],`nbpoint`=[".$nb_point."],`libelle`=[".$libelle."] WHERE `id` =[".$id_recover."]");
+        $sth = $dbCnx->prepare("UPDATE `parametre` SET `corde`=".$corde.",`tmax_p` = ".$tmax_p.",`tmax_mm`=".$tmax_mm.",`fmax_p`=".$fmax_p.",`fmax_mm`=".$fmax_mm.",`nbpoint`=".$nb_point.",`libelle`='".$libelle."' WHERE `id` =".$id_recover."");
         try {
             $sth->execute();
             echo "ok";

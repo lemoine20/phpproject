@@ -30,6 +30,7 @@ $parametres = $sth->fetchAll(PDO::FETCH_CLASS,'Parametre');
         <td scope="col">Fmax %</td>
         <td scope="col">Voir Graphique</td>
         <td scope="col">Suppression</td>
+        <td scope="col">Modification</td>
       </tr>
     </thead>
     <tbody>
