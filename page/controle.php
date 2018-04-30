@@ -9,83 +9,74 @@
         echo "Connexion échouée : ".$e->getMessage();
         exit;
     }
-?>
 
+    $id_recover = intval($_POST['id_recover']);
+    $corde = intval($_POST['corde']);
+    $sth = $dbCnx->prepare("SELECT * FROM parametre WHERE id='".$id_recover."'");
+    $sth->execute();
+    $parametre = $sth->fetchAll(PDO::FETCH_CLASS,'Parametre');
+
+?>
 <buttton><a href='index.php'>Page Principale</a></button><br>
-<form  method="post">
-    <div class="form-group">
-        Date : <input type="date" class="form-control" name="date1"/> <!-- possible ajout auto. Avoir-->
-        <br>
-        Corde : <input type="number" class="form-control" min="0" name="corde"/> en mm.
-        <br>
-        Nombre de points : <input type="number" class="form-control" min="0" name="nb_point"/>
-        <br>
-        libelle : <input type="text" class="form-control" name="libelle"/>
-        <br>
-        Tmax (%) : <input type="number" class="form-control" max="100" min ="0" name="tmax_p"/>
-        <br>
-        Fmax (%) : <input type="number" class="form-control" max="100" min ="0" name="fmax_p"/>
-        <br>
-        <br>
-        <input type="submit" name="submit" class="btn btn-primary"><br>
-    </div>
+
     <?php
 
         $length = 78;
         // vérifiez que les données sont présentes
-        $_POST["corde"]."<br>"; //corde
-        //echo filter_has_var(INPUT_POST, 'corde') ? 'Yes' : 'No';
 
-        $_POST["date1"]."<br>"; //date
-        //echo filter_has_var(INPUT_POST, 'date1') ? 'Yes' : 'No';
 
-        $_POST["nb_point"]."<br>"; //nb_point
-        //echo filter_has_var(INPUT_POST, 'nb_point') ? 'Yes' : 'No';
+        $nb_point = intval($_POST['nb_point']);
 
-        $_POST["libelle"]."<br>"; //libelle
-        //echo filter_has_var(INPUT_POST, 'libelle') ? 'Yes' : 'No';
+        $libelle = $_POST['libelle'];
 
-        $_POST["tmax_p"]."<br>";
-        //echo filter_has_var(INPUT_POST, 'tmax_p') ? 'Yes' : 'No';
+        $tmax_p = intval($_POST['tmax_p']);
 
-        $_POST["fmax_p"]."<br>";
-        //echo filter_has_var(INPUT_POST, 'fmax_p') ? 'Yes' : 'No';
-
-        $corde = $_POST["corde"];
-        echo addslashes("corde : ".$corde)."<br>";
-
-        $date1 = $_POST["date1"];
-        echo addslashes("date : ".$date1)."<br>";
-
-        $nb_point = $_POST["nb_point"];
-        echo addslashes("NB_POINT :".$nb_point)."<br>";
-
-        $libelle = $_POST["libelle"];
-        echo addslashes("Libelle : ".$libelle)."<br>";
-
-        $tmax_p = $_POST["tmax_p"];
-        echo addslashes("Tmax_p : ".$tmax_p)."<br>";
-
-        $fmax_p = $_POST["fmax_p"];
-        echo addslashes("fmax_p : ".$fmax_p)."<br>";
+        $fmax_p = intval($_POST['fmax_p']);
 
         $tmax_mm =($tmax_p/100)*$corde;
         $fmax_mm =($fmax_p/100)*$corde;
 
 
+        //
+        $stl = $dbCnx->prepare("UPDATE parametre SET corde = ".$corde." WHERE id =".$id_recover."");
+        var_dump($stl);
+        $stl1 = $dbCnx->prepare("UPDATE parametre SET tmax_p = ".$tmax_p." WHERE id =".$id_recover."");
+        var_dump($stl1);
+        $stl2 = $dbCnx->prepare("UPDATE parametre SET tmax_mm=".$tmax_mm." WHERE id =".$id_recover."");
+        var_dump($stl2);
+        $stl3 = $dbCnx->prepare("UPDATE parametre SET fmax_p=".$fmax_p." WHERE id =".$id_recover."");
+        var_dump($stl3);
+        $stl4 = $dbCnx->prepare("UPDATE parametre SET fmax_mm=".$fmax_mm." WHERE id =".$id_recover."");
+        var_dump($stl4);
+        $stl5 = $dbCnx->prepare("UPDATE parametre SET nb_point=".$nb_point." WHERE id =".$id_recover."");
+        var_dump($stl5);
+        $stl6 = $dbCnx->prepare("UPDATE parametre SET libelle='".$libelle."' WHERE id =".$id_recover."");
+        var_dump($stl6);
+        echo "<br><br><br><br><br>";
 
-        $sth = $dbCnx->prepare("INSERT INTO parametre (date_ajout,corde,tmax_p,tmax_mm,fmax_p,fmax_mm,nb_point,libelle) VALUES ('$date1',$corde,$tmax_p,$tmax_mm,$fmax_p,$fmax_mm,$nb_point,'$libelle')");
         try {
-            $sth->execute();
-            echo "ok";
+            $stl->execute();
+            $stl1->execute();
+            $stl2->execute();
+            $stl3->execute();
+            $stl4->execute();
+            $stl5->execute();
+            $stl6->execute();
+        //    echo "ok";
         } catch (Exception $e) {
             echo $e;
         }
-        $parametres = $sth->fetchAll(PDO::FETCH_CLASS,'Parametre');
 
+        $sth5 = $dbCnx->prepare("DELETE FROM cambrure WHERE `id` = $id_recover)");
 
+        try {
+            $sth5->execute();
+            //    echo "ok";
+        } catch (Exception $e) {
+            echo $e;
+        }
 
-
+        $parametres = $sth->fetchAll(PDO::FETCH_CLASS,'parametre');
         $sth2 = $dbCnx->prepare("SELECT * FROM parametre");
         try {
             $sth2->execute();
@@ -143,7 +134,7 @@
       }
 
     ?>
-</form>
+
 
 
 <?php

@@ -14,9 +14,8 @@ try{
 $sth = $dbCnx->prepare("SELECT * FROM parametre");
 $sth->execute();
 $parametres = $sth->fetchAll(PDO::FETCH_CLASS,'Parametre');
-
-
 ?>
+
 <br>
 <table class="table">
     <thead>

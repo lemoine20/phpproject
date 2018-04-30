@@ -12,7 +12,7 @@
 ?>
 
 <buttton><a href='index.php'>Page Principale</a></button><br>
-<form  method="post" action="index.php">
+<form  method="post" action="controle.php">
     <div class="form-group">
         <?php
             $id_recover = intval($_POST['id_recover3']);
@@ -35,7 +35,6 @@
         <tbody>
         <?php
             echo "<tr><th scope='row'> ".$id_recover."</th>";
-            //echo "<td> ". $parametre[0]->getDate_ajout()."</td>";
             echo "<td> ".$parametre[0]->getCorde()."</td>";
             echo "<td> ".$parametre[0]->getNb_point()."</td>";
             echo "<td> ".$parametre[0]->Getlibelle()."</td>";
@@ -54,40 +53,12 @@
         <br>
         Fmax (%) : <input type="number" class="form-control" max="100" min ="0" name="fmax_p" value=""/>
         <br>
+        <?php echo "<input type='text' name='id_recover' value='".$parametre[0]->getId()."' hidden>";?>
         <br>
         <input type="submit" name="submit" class="btn btn-primary"><br>
 
     </div>
-    <?php
-
-        $length = 78;
-        // vérifiez que les données sont présentes
-
-        $corde = $_POST['corde'];
-        error_log($corde);
-
-        $nb_point = $_POST["nb_point"];
-
-        $libelle = $_POST["libelle"];
-
-        $tmax_p = $_POST["tmax_p"];
-
-        $fmax_p = $_POST["fmax_p"];
-
-        $tmax_mm =($tmax_p/100)*$corde;
-        $fmax_mm =($fmax_p/100)*$corde;
-
-
-        //
-        $sth = $dbCnx->prepare("UPDATE `parametre` SET `corde`=".$corde.",`tmax_p` = ".$tmax_p.",`tmax_mm`=".$tmax_mm.",`fmax_p`=".$fmax_p.",`fmax_mm`=".$fmax_mm.",`nbpoint`=".$nb_point.",`libelle`='".$libelle."' WHERE `id` =".$id_recover."");
-        try {
-            $sth->execute();
-            echo "ok";
-        } catch (Exception $e) {
-            echo $e;
-        }
-        $parametres = $sth->fetchAll(PDO::FETCH_CLASS,'parametre');
-    ?>
+    
 </form>
 
 
