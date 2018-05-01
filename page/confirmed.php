@@ -12,7 +12,7 @@ try{
   echo "Connexion échouée : ".$e->getMessage();
   exit;
 }
-echo "<a href = index.php class='btn btn-primary'>Page Principale<</a>;"
+echo "<a href = 'index.php' class='btn btn-primary'>Page Principale</a>";
 ?>
 <!-- <buttton><a href='index.php'>Page Principale</a></button><br> -->
 

@@ -22,7 +22,7 @@
     echo "<p class='text-center'> Données supprimées</p>";
 ?>
 <br>
-<a href='index.php'>Page Principale</a>
+<a href = 'index.php' class='btn btn-primary'>Page Principale</a>
 <?php
     require_once("../html/footer.html");
 ?>

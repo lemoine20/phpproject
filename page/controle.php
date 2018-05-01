@@ -17,7 +17,7 @@
     $parametre = $sth->fetchAll(PDO::FETCH_CLASS,'Parametre');
 
 ?>
-<buttton><a href='index.php'>Page Principale</a></button><br>
+<a href = "index.php" class='btn btn-primary'>Page Principale</a><br>
 
     <?php
 

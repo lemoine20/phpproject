@@ -2,7 +2,7 @@
 require_once("../html/header.html");
 require_once("../php/database.php");
 
-echo "<button class='btn btn-success'><a href='ajout_data.php'>ajout bdd</a></button><br>";
+echo "<a href = 'index.php' class='btn btn-primary'>Page Principale</a><br>";
 
 try{
   $dbCnx = new PDO($mysqlDsn,$myUserDb,$myPwdDb);

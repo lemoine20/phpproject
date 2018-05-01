@@ -1,4 +1,4 @@
-<buttton><a href='index.php'>Page Principale</a></button><br>
+<a href = 'index.php' class='btn btn-primary'>Page Principale</a><br>
 <?php // content="text/plain; charset=utf-8"
 require_once ('../jpgraph/src/jpgraph.php');
 require_once ('../jpgraph/src/jpgraph_line.php');
