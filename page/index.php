@@ -46,7 +46,7 @@ $parametres = $sth->fetchAll(PDO::FETCH_CLASS,'Parametre');
     <input type='text' name='id_recover' value='".$parametre->getId()."' hidden>
     <input type='submit' name='Graphique' value='Voir Graphique' class='btn btn-primary'></form></td>";
 
-    echo "<td><form action='index.php' method='post'>
+    echo "<td><form action='suppression.php' method='post'>
     <input type='text' name='id_recover2' value='".$parametre->getId()."' hidden>
     <input type='submit' name='Suppression' value='delete' onclick=\"popup()\" class='btn btn-primary'></form></td>";
 

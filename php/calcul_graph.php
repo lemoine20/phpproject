@@ -12,7 +12,7 @@ require_once("../php/database.php");
 
 
     $id_recover = $_GET['var1'];
-    error_log($id_recover);
+    //error_log($id_recover);
     $sth = $dbCnx->prepare("SELECT * FROM cambrure WHERE id_parametre = $id_recover");
     try {
         $sth->execute();
@@ -24,6 +24,7 @@ require_once("../php/database.php");
 
 
     $i = 0;
+
     foreach ($cambrures as $cambrure) {
       $yextra[$i] = $cambrure->getYextra();
       $yintra[$i] = $cambrure->getYintra();
@@ -34,10 +35,10 @@ require_once("../php/database.php");
 
 $datay1 = $yextra;
 $datay2 = $yintra;
-$datay3 = array(5,17,32,24);
+
 
 // Setup the graph
-$graph = new Graph(2500,800);
+$graph = new Graph(1200,800);
 $graph->SetScale("textlin");
 
 $theme_class=new UniversalTheme;
@@ -55,7 +56,7 @@ $graph->yaxis->HideTicks(false,false);
 
 $graph->xgrid->Show();
 $graph->xgrid->SetLineStyle("solid");
-$graph->xaxis->SetTickLabels($x_array);
+//$graph->xaxis->SetTickLabels($x_array);
 $graph->xgrid->SetColor('#E3E3E3');
 
 // Create the first line
@@ -70,11 +71,6 @@ $graph->Add($p2);
 $p2->SetColor("#B22222");
 $p2->SetLegend('Line 2');
 
-// Create the third line
-// $p3 = new LinePlot($datay3);
-// $graph->Add($p3);
-// $p3->SetColor("#FF1493");
-// $p3->SetLegend('Line 3');*/
 
 $graph->legend->SetFrameWeight(1);
 
