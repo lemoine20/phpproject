@@ -57,8 +57,8 @@
             <?php
             echo "<form action='supp2.php' method='post'>";
             echo "<input type='text' name='id_recover' value='".$parametre[0]->getId()."' hidden>";
-            echo "<input type='submit' name='submit' value='Valider' class='btn btn-primary'></form>";
-            echo "<a href = 'index.php' type='button' class='btn btn-danger'>Retour</a>";
+            echo "<input type='submit' name='submit' value='Valider' class='btn btn-primary btn-block'></form>";
+            echo "<a href = 'index.php' type='button' class='btn btn-danger btn-block'>Retour</a>";
             ?>
         </div>
     </div>

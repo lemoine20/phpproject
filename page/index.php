@@ -9,6 +9,7 @@ try{
   echo "Connexion échouée : ".$e->getMessage();
   exit;
 }
+echo "<a href = 'ajout_data.php' type='button' class='btn btn-success btn-block'>Ajouté</a><br>";
 
 $sth = $dbCnx->prepare("SELECT * FROM parametre");
 $sth->execute();
@@ -60,6 +61,5 @@ $parametres = $sth->fetchAll(PDO::FETCH_CLASS,'Parametre');
 </table>
 
 <?php
-    echo "<a href = 'ajout_data.php' type='button' class='btn btn-success btn-block'>Ajouté</a><br>";
     require_once("../html/footer.html");
 ?>

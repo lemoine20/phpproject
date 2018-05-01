@@ -13,6 +13,7 @@
     exit;
   }
 
+  echo "<a href = 'index.php' class='btn btn-info btn-block'>Retour</a>";
   $id_recover = $_POST['id_recover'];
   echo "<img src='"."../php/calcul_graph.php?var1=".$id_recover."'>";
 
@@ -24,7 +25,7 @@
   $sth2->execute();
   $parametres = $sth2->fetchAll(PDO::FETCH_CLASS,'Parametre');
 
-  echo "<a href='"."../php/calcul_graph.php?var1=".$id_recover."' download= '".$parametres[0]->getLibelle()."'>Download png</a>";
+  echo "<a type='button' class='btn' href='"."../php/calcul_graph.php?var1=".$id_recover."' download= '".$parametres[0]->getLibelle()."'>Download png</a>";
 
 
   $chemin = '../fichier.csv';
@@ -47,9 +48,8 @@
 
 
   ?>
-  <a href="../fichier.csv"  download> Download Csv</a>
+  <a href="../fichier.csv" type="button" class='btn' download> Download Csv</a>
 
-  <a href = 'index.php' class='btn btn-info btn-block'>Retour</a>
   <table class="table">
     <thead>
       <tr>

@@ -33,6 +33,8 @@
         $tmax_mm =($tmax_p/100)*$corde;
         $fmax_mm =($fmax_p/100)*$corde;
 
+        $sth5 = $dbCnx->prepare("DELETE FROM cambrure WHERE `id` = $id_recover)");
+
         //
         $stl = $dbCnx->prepare("UPDATE parametre SET corde = ".$corde." WHERE id =".$id_recover."");
         $stl1 = $dbCnx->prepare("UPDATE parametre SET tmax_p = ".$tmax_p." WHERE id =".$id_recover."");
@@ -56,7 +58,6 @@
             echo $e;
         }
 
-        $sth5 = $dbCnx->prepare("DELETE FROM cambrure WHERE `id` = $id_recover)");
 
         try {
             $sth5->execute();

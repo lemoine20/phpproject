@@ -11,13 +11,13 @@
     }
 
     $id_recover = intval($_POST['id_recover']);
+    $std = $dbCnx->prepare("DELETE FROM cambrure WHERE id_parametre='".$id_recover."'");
+    $std->execute();
+    $parametre = $std->fetchAll(PDO::FETCH_CLASS,'Cambrure');
     $sth = $dbCnx->prepare("DELETE FROM parametre WHERE id='".$id_recover."'");
     $sth->execute();
     $parametre = $sth->fetchAll(PDO::FETCH_CLASS,'Parametre');
 
-    $std = $dbCnx->prepare("DELETE FROM cambrure WHERE id_parametre='".$id_recover."'");
-    $std->execute();
-    $parametre = $std->fetchAll(PDO::FETCH_CLASS,'Cambrure');
 
     echo "<p class='text-center'> Données supprimées</p>";
 ?>
