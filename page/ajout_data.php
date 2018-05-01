@@ -9,7 +9,7 @@
       echo "Connexion échouée : ".$e->getMessage();
       exit;
     }
-    echo "<a href = 'index.php' class='btn btn-primary'>Page Principale</a>";
+    echo "<a href = 'index.php' class='btn btn-primary btn-block'>Page Principale</a>";
 ?>
 
 <form  method="post" action="confirmed.php">
@@ -27,7 +27,7 @@
         Fmax (%) : <input type="number" class="form-control" max="100" min ="0" name="fmax_p" required/>
         <br>
         <br>
-        <input type="submit" name="submit" class="btn btn-primary" ><br>
+        <input type="submit" name="submit" class="btn btn-success btn-block" ><br>
     </div>
 </form>
 

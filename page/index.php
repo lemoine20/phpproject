@@ -20,22 +20,20 @@ $parametres = $sth->fetchAll(PDO::FETCH_CLASS,'Parametre');
 <table class="table">
     <thead>
       <tr>
-        <td scope="col">ID</td>
-        <td scope="col">Date </td>
-        <td scope="col">Corde</td>
-        <td scope="col">Nombre de points</td>
-        <td scope="col">Libelle</td>
-        <td scope="col">Tmax %</td>
-        <td scope="col">Fmax %</td>
-        <td scope="col">Voir Graphique</td>
-        <td scope="col">Suppression</td>
-        <td scope="col">Modification</td>
+        <th scope="col">Date </th>
+        <th scope="col">Corde</th>
+        <th scope="col">Nombre de points</th>
+        <th scope="col">Libelle</th>
+        <th scope="col">Tmax %</th>
+        <th scope="col">Fmax %</th>
+        <th scope="col">Voir Graphique</th>
+        <th scope="col">Suppression</th>
+        <th scope="col">Modification</th>
       </tr>
     </thead>
     <tbody>
   <?php
   foreach ($parametres as $parametre) {
-    echo "<tr><th scope='row'> ".$parametre->getId() ."</th>";
     echo "<td> ". $parametre->getDate_ajout()."</td>";
     echo "<td> ".$parametre->getCorde()."</td>";
     echo "<td> ".$parametre->getNb_point()."</td>";

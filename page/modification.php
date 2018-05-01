@@ -24,17 +24,15 @@
         <table class="table">
         <thead>
           <tr>
-            <td scope="col">ID</td>
-            <td scope="col">Corde</td>
-            <td scope="col">Nombre de points</td>
-            <td scope="col">Libelle</td>
-            <td scope="col">Tmax %</td>
-            <td scope="col">Fmax %</td>
+            <th scope="col">Corde</th>
+            <th scope="col">Nombre de points</th>
+            <th scope="col">Libelle</th>
+            <th scope="col">Tmax %</th>
+            <th scope="col">Fmax %</th>
           </tr>
         </thead>
         <tbody>
         <?php
-            echo "<tr><th scope='row'> ".$id_recover."</th>";
             echo "<td> ".$parametre[0]->getCorde()."</td>";
             echo "<td> ".$parametre[0]->getNb_point()."</td>";
             echo "<td> ".$parametre[0]->Getlibelle()."</td>";

@@ -1,18 +1,21 @@
+
 <?php
 
-    require_once("../html/header.html");
-    require_once("../php/database.php");
 
-    try{
-      $dbCnx = new PDO($mysqlDsn,$myUserDb,$myPwdDb);
-    }catch(PDOException $e){
-      echo "Connexion échouée : ".$e->getMessage();
-      exit;
-    }
-    echo "<a href = 'index.php' class='btn btn-primary'>Page Principale</a>";
+require_once("../html/header.html");
+require_once("../php/database.php");
+
+
+try{
+  $dbCnx = new PDO($mysqlDsn,$myUserDb,$myPwdDb);
+}catch(PDOException $e){
+  echo "Connexion échouée : ".$e->getMessage();
+  exit;
+}
+echo "<a href = index.php class='btn btn-primary btn-block'>Page Principale</a>";
+echo $_POST["fichier"];
 ?>
 <!-- <buttton><a href='index.php'>Page Principale</a></button><br> -->
-
 
 <table class="table">
   <thead>
@@ -31,18 +34,19 @@
   </thead>
   <tbody>
     <?php
-        $tmax_mm =($_POST["tmax_p"]/100)*$_POST["corde"];
-        $fmax_mm =($_POST["fmax_p"]/100)*$_POST["corde"];
+    $tmax_mm =($_POST["tmax_p"]/100)*$_POST["corde"];
+    $fmax_mm =($_POST["fmax_p"]/100)*$_POST["corde"];
 
-        echo "<td> ".$_POST["date1"]."</td>";
-        echo "<td> ".$_POST["corde"]."</td>";
-        echo "<td> ".$_POST["nb_point"]."</td>";
-        echo "<td> ".$_POST["libelle"]."</td>";
-        echo "<td> ".$_POST["tmax_p"]."</td>";
-        echo "<td> ".$tmax_mm."</td>";
-        echo "<td> ".$_POST["fmax_p"]."</td>";
-        echo "<td> ".$fmax_mm."</td>";
-        echo "</tr>";
+    echo "<td> ".$_POST["date1"]."</td>";
+    echo "<td> ".$_POST["corde"]."</td>";
+    echo "<td> ".$_POST["nb_point"]."</td>";
+    echo "<td> ".$_POST["libelle"]."</td>";
+    echo "<td> ".$_POST["tmax_p"]."</td>";
+    echo "<td> ".$tmax_mm."</td>";
+    echo "<td> ".$_POST["fmax_p"]."</td>";
+    echo "<td> ".$fmax_mm."</td>";
+    echo "</tr>";
+
     ?>
   </tbody>
 </table>
@@ -70,64 +74,65 @@ foreach ($parametres as $parametre) {
 
 if ($validate == 0) {
 
-    $sth = $dbCnx->prepare("INSERT INTO parametre (date_ajout,corde,tmax_p,tmax_mm,fmax_p,fmax_mm,nb_point,libelle)
-                            VALUES ('$date1',$corde,$tmax_p,$tmax_mm,$fmax_p,$fmax_mm,$nb_point,'$libelle')");
-    try {
-      $sth->execute();
-      echo "ok";
-    } catch (Exception $e) {
-      echo $e;
-    }
+$sth = $dbCnx->prepare("INSERT INTO parametre (date_ajout,corde,tmax_p,tmax_mm,fmax_p,fmax_mm,nb_point,libelle)
+                        VALUES ('$date1',$corde,$tmax_p,$tmax_mm,$fmax_p,$fmax_mm,$nb_point,'$libelle')");
+try {
+  $sth->execute();
+} catch (Exception $e) {
+  echo $e;
+}
 
 
-    $id_recover = $parametres[sizeof($parametres)-1]->getId();
-    $id_recover++;
-    $sth3 = $dbCnx->prepare("SELECT * FROM parametre WHERE id=$id_recover");
-    $sth3->execute();
-    $parametre = $sth3->fetchAll(PDO::FETCH_CLASS,'Parametre');
 
 
-    echo "<br> Nombre de points :".$parametre[0]->getNb_point()."<br>";
-    echo "<br> id_recover :".$id_recover."<br>";
-    print_r($parametre[0]);
-    $Xpos = 0;
-    $corde =$parametre[0]->getCorde();
-    $XposIni= $corde/$parametre[0]->getNb_point();
-    $sommedSiXgi = 0;
-    $sommeDsi=0;
+$id_recover = $parametres[sizeof($parametres)-1]->getId();
+$id_recover++;
+$sth3 = $dbCnx->prepare("SELECT * FROM parametre WHERE id=$id_recover");
+$sth3->execute();
+$parametre = $sth3->fetchAll(PDO::FETCH_CLASS,'Parametre');
 
 
-    for ($i=0; $i < $parametre[0]->getNb_point(); $i++) {
 
-      $valeurCalculer = ($Xpos/$corde);
-      $Cambrure = -4*(pow($valeurCalculer,2)-$valeurCalculer)*$parametre[0]->getFmax_mm();
-      $epaisseur = -(1.015*(pow($valeurCalculer,4))-2.843*(pow($valeurCalculer,3))+3.156*(pow($valeurCalculer,2))+1.26*($valeurCalculer)-2.969*(pow($valeurCalculer,0.5)))*$parametre[0]->getTmax_mm();
-      $Xintrados = $Cambrure-$epaisseur/2;
-      $Xextrados = $Cambrure+$epaisseur/2;
-      $EpaisseurMoy = ($Xextrados-$Xintrados)/2;
-      $Xgi = $Xpos/2;
-      $Dsi = $Xpos + $EpaisseurMoy;
-      $Sixgi = $Dsi * $Xgi;
-      $sommedSiXgi = $sommedSiXgi + $Sixgi;
-      $Xpos =$XposIni+$Xpos;
-      $sth4 = $dbCnx->prepare("INSERT INTO cambrure (x,t,f,yintra,yextra,igx,id_parametre)
-      VALUES ($Xpos,$epaisseur,$Cambrure,$Xintrados,$Xextrados,$Xgi,$id_recover)");
+$Xpos = 0;
+$corde =$parametre[0]->getCorde();
+$XposIni= $corde/$parametre[0]->getNb_point();
+$sommedSiXgi = 0;
+$sommeDsi=0;
 
-      try {
-        $sth4->execute();
 
-      } catch (Exception $e) {
-        echo $e;
-      }
-    }
-      echo "<p class='text-center'>Ajouter à la base de données</p>";
+for ($i=0; $i < $parametre[0]->getNb_point(); $i++) {
 
+  $valeurCalculer = ($Xpos/$corde);
+  $Cambrure = -4*(pow($valeurCalculer,2)-$valeurCalculer)*$parametre[0]->getFmax_mm();
+  $epaisseur = -(1.015*(pow($valeurCalculer,4))-2.843*(pow($valeurCalculer,3))+3.156*(pow($valeurCalculer,2))+1.26*($valeurCalculer)-2.969*(pow($valeurCalculer,0.5)))*$parametre[0]->getTmax_mm();
+  $Xintrados = $Cambrure-$epaisseur/2;
+  $Xextrados = $Cambrure+$epaisseur/2;
+  $EpaisseurMoy = ($Xextrados-$Xintrados)/2;
+  $Xgi = $Xpos/2;
+  $Dsi = $Xpos + $EpaisseurMoy;
+  $Sixgi = $Dsi * $Xgi;
+  $sommedSiXgi = $sommedSiXgi + $Sixgi;
+  $Xpos =$XposIni+$Xpos;
+  $sth4 = $dbCnx->prepare("INSERT INTO cambrure (x,t,f,yintra,yextra,igx,id_parametre)
+  VALUES ($Xpos,$epaisseur,$Cambrure,$Xintrados,$Xextrados,$Xgi,$id_recover)");
+
+  try {
+    $sth4->execute();
+
+  } catch (Exception $e) {
+    echo $e;
+  }
+}
+  echo "<p class='text-center'>Ajouter à la base de données</p>";
+  echo "<a href = index.php class='btn btn-success btn-block'>OK</a>";
 }else {
-  echo "Ce libelle est déja existant";
+  echo "<p class='text-center'>Ce libelle est déja existant</p>";
+  echo "<a href = ajout_data.php class='btn btn-danger btn-block'>Retour</a>";
 }
 
 ?>
 </form>
+
 
 <?php
 require_once("../html/footer.html");
