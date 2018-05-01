@@ -55,7 +55,7 @@
         <br>
         <?php echo "<input type='text' name='id_recover' value='".$parametre[0]->getId()."' hidden>";?>
         <br>
-        <input type="submit" name="submit" class="btn btn-primary"><br>
+        <input type="submit" name="submit" type='button' class="btn btn-success btn-block"><br>
 
     </div>
 

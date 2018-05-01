@@ -51,14 +51,17 @@
             ?>
         </div>
     </form>
-    <p>Voulez vous supprimer cette ligne?</p>
+    <div class="center-block">
+        <p class='text-center'>Voulez vous supprimer cette ligne?</p>
 
-    <?php
-    echo "<form action='supp2.php' method='post'>";
-    echo "<input type='text' name='id_recover' value='".$parametre[0]->getId()."' hidden>";
-    echo "<input type='submit' name='submit' value='Valider' class='btn btn-primary'></form>";
-    echo "<a href = 'index.php' class='btn btn-danger'>Retour</a>";
-    ?>
+            <?php
+            echo "<form action='supp2.php' method='post'>";
+            echo "<input type='text' name='id_recover' value='".$parametre[0]->getId()."' hidden>";
+            echo "<input type='submit' name='submit' value='Valider' class='btn btn-primary'></form>";
+            echo "<a href = 'index.php' type='button' class='btn btn-danger'>Retour</a>";
+            ?>
+        </div>
+    </div>
     <?php
         require_once("../html/footer.html");
     ?>

@@ -17,13 +17,10 @@
     $parametre = $sth->fetchAll(PDO::FETCH_CLASS,'Parametre');
 
 ?>
-<a href = "index.php" class='btn btn-primary'>Page Principale</a><br>
 
     <?php
-
         $length = 78;
         // vérifiez que les données sont présentes
-
 
         $nb_point = intval($_POST['nb_point']);
 
@@ -36,22 +33,14 @@
         $tmax_mm =($tmax_p/100)*$corde;
         $fmax_mm =($fmax_p/100)*$corde;
 
-
         //
         $stl = $dbCnx->prepare("UPDATE parametre SET corde = ".$corde." WHERE id =".$id_recover."");
-        var_dump($stl);
         $stl1 = $dbCnx->prepare("UPDATE parametre SET tmax_p = ".$tmax_p." WHERE id =".$id_recover."");
-        var_dump($stl1);
         $stl2 = $dbCnx->prepare("UPDATE parametre SET tmax_mm=".$tmax_mm." WHERE id =".$id_recover."");
-        var_dump($stl2);
         $stl3 = $dbCnx->prepare("UPDATE parametre SET fmax_p=".$fmax_p." WHERE id =".$id_recover."");
-        var_dump($stl3);
         $stl4 = $dbCnx->prepare("UPDATE parametre SET fmax_mm=".$fmax_mm." WHERE id =".$id_recover."");
-        var_dump($stl4);
         $stl5 = $dbCnx->prepare("UPDATE parametre SET nb_point=".$nb_point." WHERE id =".$id_recover."");
-        var_dump($stl5);
         $stl6 = $dbCnx->prepare("UPDATE parametre SET libelle='".$libelle."' WHERE id =".$id_recover."");
-        var_dump($stl6);
         echo "<br><br><br><br><br>";
 
         try {
@@ -80,14 +69,14 @@
         $sth2 = $dbCnx->prepare("SELECT * FROM parametre");
         try {
             $sth2->execute();
-            echo "ok";
+            //echo "ok";
         } catch (Exception $e) {
             echo $e;
         }
         $parametres = $sth2->fetchAll(PDO::FETCH_CLASS,'Parametre');
 
         $id_recover = $parametres[sizeof($parametres)-1]->getId();
-        echo "id recup : ".$id_recover;
+        // echo "id recup : ".$id_recover;
         $sth3 = $dbCnx->prepare("SELECT * FROM parametre WHERE id=$id_recover");
         $sth3->execute();
         $parametre = $sth3->fetchAll(PDO::FETCH_CLASS,'Parametre');
@@ -101,16 +90,16 @@
         $sommedSiXgi = 0;
         $sommeDsi=0;
 
-        var_dump(intval($parametre[0]->getTmax_mm()));
+        intval($parametre[0]->getTmax_mm());
 
         for ($i=0; $i < $parametre[0]->getNb_point(); $i++) {
 
           $valeurCalculer = ($Xpos/$corde);
-          echo "<br> Xpos =".$Xpos."<br>";
+        //  echo "<br> Xpos =".$Xpos."<br>";
           $Cambrure = -4*($valeurCalculer^2-$valeurCalculer)*$parametre[0]->getFmax_mm();
           $epaisseur = -(1.015*(pow($valeurCalculer,4))-2.843*(pow($valeurCalculer,3))+3.156*(pow($valeurCalculer,2))+1.26*($valeurCalculer)-2.969*(pow($valeurCalculer,0.5)))*3.2;
                   // = -(1,015*(A3/$T$3)^4        -2,843*(A3/$T$3)^3        +3,516*(A3/$T$3)^2        +1,26*(A3/$T$3)        -2,969*(A3/$T$3)^0,5)*$T$5
-          echo  $i." : ". $epaisseur. "= -(1.015*(".$valeurCalculer."^4)-2.843*(".$valeurCalculer."^3)+3.516*(".$valeurCalculer."^2)+1.26*(".$valeurCalculer.")-2.969*(".$valeurCalculer."^0.5))*3.2<br>";
+          // echo  $i." : ". $epaisseur. "= -(1.015*(".$valeurCalculer."^4)-2.843*(".$valeurCalculer."^3)+3.516*(".$valeurCalculer."^2)+1.26*(".$valeurCalculer.")-2.969*(".$valeurCalculer."^0.5))*3.2<br>";
           $Xintrados = -$epaisseur/2;
           $Xextrados = $epaisseur/2;
           $EpaisseurMoy = ($Xextrados-$Xintrados)/2;
@@ -128,15 +117,10 @@
           } catch (Exception $e) {
               echo $e;
           }
-
-
-
       }
-
     ?>
-
-
-
+    <p class='text-center'> La modification a bien été effectuée</p>
+    <a href = "index.php" type='button' class='btn btn-primary btn-block'>OK</a><br>
 <?php
     require_once("../html/footer.html");
 ?>
