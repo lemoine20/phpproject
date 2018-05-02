@@ -16,7 +16,7 @@
   echo "<a href = '../index.php' class='btn btn-info btn-block'>Retour</a>";
   $id_recover = $_POST['id_recover'];
   echo "<img src='"."../php/calcul_graph.php?var1=".$id_recover."'>";
-
+/*On recupère les données par rapport à l'id selectionnée */
 
   $sth = $dbCnx->prepare("SELECT x,yintra,yextra,igx FROM cambrure WHERE id_parametre = $id_recover ");
   $sth->execute();
@@ -25,9 +25,10 @@
   $sth2->execute();
   $parametres = $sth2->fetchAll(PDO::FETCH_CLASS,'Parametre');
 
+/*Le lien pour télécharger l'image en png*/
   echo "<a type='button' class='btn' href='"."../php/calcul_graph.php?var1=".$id_recover."' download= '".$parametres[0]->getLibelle()."'>Download png</a>";
 
-
+/*Création du fichier CSV*/
   $chemin = '../fichier.csv';
   $delimiteur = ',';
 
@@ -35,6 +36,7 @@
   fprintf($fichier_csv, chr(0xEF).chr(0xBB).chr(0xBF));
 
   $a = 0;
+/*On rentre les données dans le fichier csv*/
   foreach($cambrures as $cambrure){
     if($a == 0 ){
       $file = array('X','Yintra','Yextra','Igx');
@@ -47,6 +49,7 @@
   fclose($fichier_csv);
 
   ?>
+<!--Lien pour télécharger le fichier CSV -->
   <a href="../fichier.csv" type="button" class='btn' download> Download Csv</a>
 
   <table class="table">
@@ -62,6 +65,8 @@
     </thead>
     <tbody>
       <?php
+    
+      
       $sth = $dbCnx->prepare("SELECT * FROM cambrure WHERE id_parametre = $id_recover ");
       $sth->execute();
       $cambrures = $sth->fetchAll(PDO::FETCH_CLASS,'Cambrure');
