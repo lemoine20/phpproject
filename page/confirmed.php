@@ -33,9 +33,13 @@ echo $_POST["fichier"];
     </tr>
   </thead>
   <tbody>
+   
     <?php
+    /*Calcul de Tmax et Fmax en millimetre*/
+    
     $tmax_mm =($_POST["tmax_p"]/100)*$_POST["corde"];
     $fmax_mm =($_POST["fmax_p"]/100)*$_POST["corde"];
+    
 
     echo "<td> ".$_POST["date1"]."</td>";
     echo "<td> ".$_POST["corde"]."</td>";
@@ -57,6 +61,9 @@ $sth2 = $dbCnx->prepare("SELECT * FROM parametre ");
 $sth2->execute();
 $parametres = $sth2->fetchAll(PDO::FETCH_CLASS,'Parametre');
 
+
+/*Affichage des données choisit par le client*/
+
 $length = 78;
 $date1 = $_POST["date1"];
 $corde = $_POST["corde"];
@@ -64,14 +71,14 @@ $tmax_p =$_POST["tmax_p"];
 $fmax_p = $_POST["fmax_p"];
 $nb_point = $_POST["nb_point"];
 $libelle =$_POST["libelle"];
-
+/*Verification si le libelle existe déja*/
 foreach ($parametres as $parametre) {
   if (strnatcmp ( $libelle, $parametre->getLibelle() ) == 0 ) {
     $validate = 1;
     break;
   }
 }
-
+/*Si le libelle n'exite pas alors la requète SQL est envoyée*/
 if ($validate == 0) {
 
 $sth = $dbCnx->prepare("INSERT INTO parametre (date_ajout,corde,tmax_p,tmax_mm,fmax_p,fmax_mm,nb_point,libelle)
@@ -83,11 +90,13 @@ try {
 }
 
 
-
+/*Récupération de l'id du des paramètres ajouté */
 
 $id_recover = $parametres[sizeof($parametres)-1]->getId();
 $id_recover++;
-$sth3 = $dbCnx->prepare("SELECT * FROM parametre WHERE id=$id_recover");
+
+ /*On recupère */ 
+ $sth3 = $dbCnx->prepare("SELECT * FROM parametre WHERE id=$id_recover");
 $sth3->execute();
 $parametre = $sth3->fetchAll(PDO::FETCH_CLASS,'Parametre');
 
