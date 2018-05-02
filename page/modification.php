@@ -17,7 +17,7 @@
         <?php
             $id_recover = intval($_POST['id_recover3']);
                
-        $parametres = sql_requete_recup('Parametre','SELECT * FROM parametre',$mysqlDsn,$myUserDb,$myPwdDb);
+        $parametres = sql_requete_recup('Parametre','SELECT * FROM parametre WHERE id= '".$id_recover."',$mysqlDsn,$myUserDb,$myPwdDb);
 
         ?>
         <table class="table">
