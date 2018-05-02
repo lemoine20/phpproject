@@ -3,6 +3,8 @@
 
 
     require_once("../php/database.php");
+
+
     try{
       $dbCnx = new PDO($mysqlDsn,$myUserDb,$myPwdDb);
     }catch(PDOException $e){

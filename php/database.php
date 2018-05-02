@@ -115,4 +115,57 @@ class Cambrure{
     return $this->yextra;
   }
 }
+
+// requete de connection a la base de données
+function sql_requete($requete,$mysqlDsn,$myUserDb,$myPwdDb){
+
+  try{
+    $dbCnx = new PDO($mysqlDsn,$myUserDb,$myPwdDb);
+  }catch(PDOException $e){
+    echo "Connexion échouée : ".$e->getMessage();
+    exit;
+  }
+
+
+  $sth = $dbCnx->prepare($requete);
+  try {
+    $sth->execute();
+  } catch (Exception $e) {
+    echo $e;
+  }
+
+  $dbCnx = null;
+
+}
+
+// récupère les valeurs dans la base de données
+function sql_requete_recup($classe,$requete,$mysqlDsn,$myUserDb,$myPwdDb){
+
+
+
+  try{
+    $dbCnx = new PDO($mysqlDsn,$myUserDb,$myPwdDb);
+  }catch(PDOException $e){
+    echo "Connexion échouée : ".$e->getMessage();
+    exit;
+  }
+
+
+  $sth = $dbCnx->prepare($requete);
+  try {
+    $sth->execute();
+  } catch (Exception $e) {
+    echo $e;
+  }
+
+  if ($classe == 'Parametre') {
+      return  $sth->fetchAll(PDO::FETCH_CLASS,'Parametre');
+  }else if($classe == 'Cambrure'){
+      return  $sth->fetchAll(PDO::FETCH_CLASS,'Cambrure');
+  }
+
+
+
+
+}
 ?>

@@ -73,27 +73,14 @@ foreach ($parametres as $parametre) {
 }
 
 if ($validate == 0) {
+sql_requete("INSERT INTO parametre (date_ajout,corde,tmax_p,tmax_mm,fmax_p,fmax_mm,nb_point,libelle)
+                        VALUES ('$date1',$corde,$tmax_p,$tmax_mm,$fmax_p,$fmax_mm,$nb_point,'$libelle')",$mysqlDsn,$myUserDb,$myPwdDb);
 
-$sth = $dbCnx->prepare("INSERT INTO parametre (date_ajout,corde,tmax_p,tmax_mm,fmax_p,fmax_mm,nb_point,libelle)
-                        VALUES ('$date1',$corde,$tmax_p,$tmax_mm,$fmax_p,$fmax_mm,$nb_point,'$libelle')");
-try {
-  $sth->execute();
-} catch (Exception $e) {
-  echo $e;
-}
-
-
-$sth0 = $dbCnx->prepare("SELECT * FROM parametre ");
-$sth0->execute();
-$parametres = $sth0->fetchAll(PDO::FETCH_CLASS,'Parametre');
-
+$parametres = sql_requete("SELECT * FROM parametre ",$mysqlDsn,$myUserDb,$myPwdDb);
 
 $id_recover = $parametres[sizeof($parametres)-1]->getId();
 
-$sth3 = $dbCnx->prepare("SELECT * FROM parametre WHERE id=$id_recover");
-$sth3->execute();
-$parametre = $sth3->fetchAll(PDO::FETCH_CLASS,'Parametre');
-
+$parametres = sql_requete("SELECT * FROM parametre WHERE id=$id_recover",$mysqlDsn,$myUserDb,$myPwdDb);
 
 
 $Xpos = 0;
