@@ -100,7 +100,7 @@ $sommedSiXgi = 0;
 $sommeDsi=0;
 
 
-for ($i=0; $i < $parametre[0]->getNb_point(); $i++) {
+for ($i=0; $i <= $parametre[0]->getNb_point(); $i++) {
 
   $valeurCalculer = ($Xpos/$corde);
   $Cambrure = -4*(pow($valeurCalculer,2)-$valeurCalculer)*$parametre[0]->getFmax_mm();
@@ -112,7 +112,6 @@ for ($i=0; $i < $parametre[0]->getNb_point(); $i++) {
   $Dsi = $Xpos + $EpaisseurMoy;
   $Sixgi = $Dsi * $Xgi;
   $sommedSiXgi = $sommedSiXgi + $Sixgi;
-  $Xpos =$XposIni+$Xpos;
   $sth4 = $dbCnx->prepare("INSERT INTO cambrure (x,t,f,yintra,yextra,igx,id_parametre)
   VALUES ($Xpos,$epaisseur,$Cambrure,$Xintrados,$Xextrados,$Xgi,$id_recover)");
 
@@ -122,6 +121,7 @@ for ($i=0; $i < $parametre[0]->getNb_point(); $i++) {
   } catch (Exception $e) {
     echo $e;
   }
+  $Xpos =$XposIni+$Xpos;
 }
   echo "<p class='text-center'>Ajouter à la base de données</p>";
   echo "<a href = index.php class='btn btn-success btn-block'>OK</a>";

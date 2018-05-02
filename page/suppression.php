@@ -31,18 +31,18 @@
             <table class="table">
             <thead>
               <tr>
+                <th scope="col">Libelle</th>
                 <th scope="col">Corde</th>
                 <th scope="col">Nombre de points</th>
-                <th scope="col">Libelle</th>
                 <th scope="col">Tmax %</th>
                 <th scope="col">Fmax %</th>
               </tr>
             </thead>
             <tbody>
             <?php
+                echo "<td> ".$parametre[0]->Getlibelle()."</td>";
                 echo "<td> ".$parametre[0]->getCorde()."</td>";
                 echo "<td> ".$parametre[0]->getNb_point()."</td>";
-                echo "<td> ".$parametre[0]->Getlibelle()."</td>";
                 echo "<td> ".$parametre[0]->getTmax_p()."</td>";
                 echo "<td> ".$parametre[0]->getFmax_p()."</td>";
                 echo "</tbody></table>";

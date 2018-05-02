@@ -18,7 +18,7 @@
   echo "<img src='"."../php/calcul_graph.php?var1=".$id_recover."'>";
 
 
-  $sth = $dbCnx->prepare("SELECT x,yintra,yextra,Igx FROM cambrure WHERE id_parametre = $id_recover ");
+  $sth = $dbCnx->prepare("SELECT x,yintra,yextra,igx FROM cambrure WHERE id_parametre = $id_recover ");
   $sth->execute();
   $cambrures = $sth->fetchAll(PDO::FETCH_CLASS,'Cambrure');
   $sth2 = $dbCnx->prepare("SELECT libelle FROM parametre WHERE id = $id_recover ");
