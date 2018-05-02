@@ -12,10 +12,7 @@
 
     $id_recover = intval($_POST['id_recover2']);
     $corde = intval($_POST['corde']);
-    $sth = $dbCnx->prepare("SELECT * FROM parametre WHERE id='".$id_recover."'");
-    $sth->execute();
-    $parametre = $sth->fetchAll(PDO::FETCH_CLASS,'Parametre');
-
+    $parametres = sql_requete_recup("SELECT * FROM parametre WHERE id='".$id_recover."'",$mysqlDsn,$myUserDb,$myPwdDb);
 ?>
 
     <a href = '../index.php' class='btn btn-primary btn-block'>Page Principale</a><br>
