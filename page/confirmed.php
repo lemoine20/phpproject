@@ -116,15 +116,9 @@ for ($i=0; $i <= $parametre[0]->getNb_point(); $i++) {
   $Dsi = $Xpos + $EpaisseurMoy;
   $Sixgi = $Dsi * $Xgi;
   $sommedSiXgi = $sommedSiXgi + $Sixgi;
-  $sth4 = $dbCnx->prepare("INSERT INTO cambrure (x,t,f,yintra,yextra,igx,id_parametre)
-  VALUES ($Xpos,$epaisseur,$Cambrure,$Xintrados,$Xextrados,$Xgi,$id_recover)");
+  sql_requete("INSERT INTO cambrure (x,t,f,yintra,yextra,igx,id_parametre)
+  VALUES ($Xpos,$epaisseur,$Cambrure,$Xintrados,$Xextrados,$Xgi,$id_recover)",$mysqlDsn,$myUserDb,$myPwdDb);
 
-  try {
-    $sth4->execute();
-
-  } catch (Exception $e) {
-    echo $e;
-  }
   $Xpos =$XposIni+$Xpos;
 }
   echo "<p class='text-center'>Ajouter à la base de données</p>";

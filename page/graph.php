@@ -17,13 +17,10 @@
   $id_recover = $_POST['id_recover'];
   echo "<img src='"."../php/calcul_graph.php?var1=".$id_recover."'>";
 
+  sql_requete_recup("cambrure","SELECT x,yintra,yextra,igx FROM cambrure WHERE id_parametre = $id_recover ",$mysqlDsn,$myUserDb,$myPwdDb);
 
-  $sth = $dbCnx->prepare("SELECT x,yintra,yextra,igx FROM cambrure WHERE id_parametre = $id_recover ");
-  $sth->execute();
-  $cambrures = $sth->fetchAll(PDO::FETCH_CLASS,'Cambrure');
-  $sth2 = $dbCnx->prepare("SELECT libelle FROM parametre WHERE id = $id_recover ");
-  $sth2->execute();
-  $parametres = $sth2->fetchAll(PDO::FETCH_CLASS,'Parametre');
+  sql_requete_recup("parametre","SELECT libelle FROM parametre WHERE id = $id_recover ",$mysqlDsn,$myUserDb,$myPwdDb);
+
 
   echo "<a type='button' class='btn' href='"."../php/calcul_graph.php?var1=".$id_recover."' download= '".$parametres[0]->getLibelle()."'>Download png</a>";
 
@@ -62,9 +59,7 @@
     </thead>
     <tbody>
       <?php
-      $sth = $dbCnx->prepare("SELECT * FROM cambrure WHERE id_parametre = $id_recover ");
-      $sth->execute();
-      $cambrures = $sth->fetchAll(PDO::FETCH_CLASS,'Cambrure');
+      sql_requete("SELECT * FROM cambrure WHERE id_parametre = $id_recover ",$mysqlDsn,$myUserDb,$myPwdDb);
 
       foreach ($cambrures as $cambrure) {
         echo "<tr>";
