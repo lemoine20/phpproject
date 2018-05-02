@@ -1,6 +1,6 @@
 <?php
-require_once("../html/header.html");
-require_once("../php/database.php");
+require_once("html/header_index.html");
+require_once("php/database.php");
 
 
 try{
@@ -9,7 +9,7 @@ try{
     echo "Connexion échouée : ".$e->getMessage();
     exit;
 }
-echo "<a href = 'ajout_data.php' type='button' class='btn btn-success btn-block'>Ajouté</a><br>";
+echo "<a href = 'page/ajout_data.php' type='button' class='btn btn-success btn-block'>Ajouté</a><br>";
 
 $sth = $dbCnx->prepare("SELECT * FROM parametre");
 $sth->execute();
@@ -40,15 +40,15 @@ $parametres = $sth->fetchAll(PDO::FETCH_CLASS,'Parametre');
         echo "<td> ".$parametre->getNb_point()."</td>";
         echo "<td> ".$parametre->getTmax_p()."</td>";
         echo "<td> ".$parametre->getFmax_p()."</td>";
-        echo "<td><form action='graph.php' method='post'>
+        echo "<td><form action='page/graph.php' method='post'>
         <input type='text' name='id_recover' value='".$parametre->getId()."' hidden>
         <input type='submit' type='button' name='Graphique' value='Voir Graphique' class='btn btn-primary'></form></td>";
 
-        echo "<td><form action='suppression.php' method='post'>
+        echo "<td><form action='page/suppression.php' method='post'>
         <input type='text' name='id_recover2' value='".$parametre->getId()."' hidden>
         <input type='submit' type='button' name='Suppression' value='delete' class='btn btn-primary'></form></td>";
 
-        echo "<td><form action='modification.php' method='post'>
+        echo "<td><form action='page/modification.php' method='post'>
         <input type='text' name='id_recover3' value='".$parametre->getId()."' hidden>
         <input type='submit' name='modif' type='button' value='modifier' class='btn btn-primary'></form></td>";
         echo "</tr>";
@@ -59,5 +59,5 @@ $parametres = $sth->fetchAll(PDO::FETCH_CLASS,'Parametre');
 </table>
 
 <?php
-    require_once("../html/footer.html");
+    require_once("html/footer_index.html");
 ?>

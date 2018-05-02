@@ -22,7 +22,7 @@
     echo "<p class='text-center'> Données supprimées</p>";
 ?>
 <br>
-<a href = 'index.php' class='btn btn btn-success btn-block'>OK</a>
+<a href = '../index.php' class='btn btn btn-success btn-block'>OK</a>
 <?php
     require_once("../html/footer.html");
 ?>

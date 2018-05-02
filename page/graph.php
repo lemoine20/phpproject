@@ -13,7 +13,7 @@
     exit;
   }
 
-  echo "<a href = 'index.php' class='btn btn-info btn-block'>Retour</a>";
+  echo "<a href = '../index.php' class='btn btn-info btn-block'>Retour</a>";
   $id_recover = $_POST['id_recover'];
   echo "<img src='"."../php/calcul_graph.php?var1=".$id_recover."'>";
 

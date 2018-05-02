@@ -121,7 +121,7 @@
       }
     ?>
     <p class='text-center'> La modification a bien été effectuée</p>
-    <a href = "index.php" type='button' class='btn btn-primary btn-block'>OK</a><br>
+    <a href = "../index.php" type='button' class='btn btn-primary btn-block'>OK</a><br>
 <?php
     require_once("../html/footer.html");
 ?>

@@ -18,7 +18,7 @@
 
 ?>
 
-    <a href = 'index.php' class='btn btn-primary btn-block'>Page Principale</a><br>
+    <a href = '../index.php' class='btn btn-primary btn-block'>Page Principale</a><br>
     <form  method="post" action="suppression.php">
         <div class="form-group">
             <?php
@@ -56,7 +56,7 @@
             echo "<form action='supp2.php' method='post'>";
             echo "<input type='text' name='id_recover' value='".$parametre[0]->getId()."' hidden>";
             echo "<input type='submit' name='submit' value='Valider' class='btn btn-primary btn-block'></form>";
-            echo "<a href = 'index.php' type='button' class='btn btn-danger btn-block'>Retour</a>";
+            echo "<a href = '../index.php' type='button' class='btn btn-danger btn-block'>Retour</a>";
             ?>
         </div>
     </div>

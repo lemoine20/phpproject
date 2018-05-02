@@ -11,7 +11,7 @@
     }
 ?>
 
-<a href = 'index.php' class='btn btn-primary btn-block'>Page Principale</a><br>
+<a href = '../index.php' class='btn btn-primary btn-block'>Page Principale</a><br>
 <form  method="post" action="controle.php">
     <div class="form-group">
         <?php
@@ -56,7 +56,6 @@
         <input type="submit" name="submit" type='button' class="btn btn-success btn-block"><br>
 
     </div>
-
 </form>
 
 

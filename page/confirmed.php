@@ -12,7 +12,7 @@ try{
   echo "Connexion échouée : ".$e->getMessage();
   exit;
 }
-echo "<a href = index.php class='btn btn-primary btn-block'>Page Principale</a>";
+echo "<a href = ../index.php class='btn btn-primary btn-block'>Page Principale</a>";
 echo $_POST["fichier"];
 ?>
 <!-- <buttton><a href='index.php'>Page Principale</a></button><br> -->
@@ -83,10 +83,13 @@ try {
 }
 
 
+$sth0 = $dbCnx->prepare("SELECT * FROM parametre ");
+$sth0->execute();
+$parametres = $sth0->fetchAll(PDO::FETCH_CLASS,'Parametre');
 
 
 $id_recover = $parametres[sizeof($parametres)-1]->getId();
-$id_recover++;
+
 $sth3 = $dbCnx->prepare("SELECT * FROM parametre WHERE id=$id_recover");
 $sth3->execute();
 $parametre = $sth3->fetchAll(PDO::FETCH_CLASS,'Parametre');
@@ -104,7 +107,7 @@ for ($i=0; $i <= $parametre[0]->getNb_point(); $i++) {
 
   $valeurCalculer = ($Xpos/$corde);
   $Cambrure = -4*(pow($valeurCalculer,2)-$valeurCalculer)*$parametre[0]->getFmax_mm();
-  $epaisseur = -(1.015*(pow($valeurCalculer,4))-2.843*(pow($valeurCalculer,3))+3.156*(pow($valeurCalculer,2))+1.26*($valeurCalculer)-2.969*(pow($valeurCalculer,0.5)))*$parametre[0]->getTmax_mm();
+  $epaisseur = -(1.015*(pow($valeurCalculer,4))-2.843*(pow($valeurCalculer,3))+3.516*(pow($valeurCalculer,2))+1.26*($valeurCalculer)-2.969*(pow($valeurCalculer,0.5)))*$parametre[0]->getTmax_mm();
   $Xintrados = $Cambrure-$epaisseur/2;
   $Xextrados = $Cambrure+$epaisseur/2;
   $EpaisseurMoy = ($Xextrados-$Xintrados)/2;
@@ -124,7 +127,7 @@ for ($i=0; $i <= $parametre[0]->getNb_point(); $i++) {
   $Xpos =$XposIni+$Xpos;
 }
   echo "<p class='text-center'>Ajouter à la base de données</p>";
-  echo "<a href = index.php class='btn btn-success btn-block'>OK</a>";
+  echo "<a href = ../index.php class='btn btn-success btn-block'>OK</a>";
 }else {
   echo "<p class='text-center'>Ce libelle est déja existant</p>";
   echo "<a href = ajout_data.php class='btn btn-danger btn-block'>Retour</a>";

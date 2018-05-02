@@ -9,7 +9,7 @@
       echo "Connexion échouée : ".$e->getMessage();
       exit;
     }
-    echo "<a href = 'index.php' class='btn btn-primary btn-block'>Page Principale</a>";
+    echo "<a href = '../index.php' class='btn btn-primary btn-block'>Page Principale</a>";
 ?>
 
 <form  method="post" action="confirmed.php">
