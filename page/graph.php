@@ -46,7 +46,6 @@
   }
   fclose($fichier_csv);
 
-
   ?>
   <a href="../fichier.csv" type="button" class='btn' download> Download Csv</a>
 
