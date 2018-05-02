@@ -86,9 +86,6 @@ sql_requete("INSERT INTO parametre (date_ajout,corde,tmax_p,tmax_mm,fmax_p,fmax_
 
 $parametres = sql_requete("SELECT * FROM parametre ",$mysqlDsn,$myUserDb,$myPwdDb);
 
-$id_recover = $parametres[sizeof($parametres)-1]->getId();
-
-
 
 /*Récupération de l'id du des paramètres ajouté */
 
@@ -96,10 +93,6 @@ $id_recover = $parametres[sizeof($parametres)-1]->getId();
 
 
  /*On recupère */
- $sth3 = $dbCnx->prepare("SELECT * FROM parametre WHERE id=$id_recover");
-$sth3->execute();
-$parametre = $sth3->fetchAll(PDO::FETCH_CLASS,'Parametre');
-
 
 $parametres = sql_requete("SELECT * FROM parametre WHERE id=$id_recover",$mysqlDsn,$myUserDb,$myPwdDb);
 
