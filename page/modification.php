@@ -16,9 +16,8 @@
     <div class="form-group">
         <?php
             $id_recover = intval($_POST['id_recover3']);
-            $sth = $dbCnx->prepare("SELECT * FROM parametre WHERE id='".$id_recover."'");
-            $sth->execute();
-            $parametre = $sth->fetchAll(PDO::FETCH_CLASS,'Parametre');
+               
+        $parametres = sql_requete_recup('Parametre','SELECT * FROM parametre',$mysqlDsn,$myUserDb,$myPwdDb);
 
         ?>
         <table class="table">
